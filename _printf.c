@@ -25,8 +25,6 @@ int _printf(const char *format, ...)
 		if (*format != '%')
 		{
 			write(1, format, 1);
-			format++;
-			count++;
 		}
 		else
 		{
@@ -35,33 +33,29 @@ int _printf(const char *format, ...)
 			{
 				int *c = va_arg(ap, int*);
 				write(1, &c, 1);
-				count++;
-				format++;
 			}
 			else if (*format == 's')
 			{
 				str = va_arg(ap, char*);
+				if (str == NULL)
+				{
+					format++;
+					continue;
+				}
 				while (str[len] != '\0')
 				{
 					len++;
 				}
 				write(1, str, len);
-				count+=len;
-				format++;
-			}
-			else if (*format == '%')
-			{
-				write(1, format, 1);
-				format++;
-				count++;
+				count+=len - 1;
 			}
 			else
 			{
 				write(1, format, 1);
-				format++;
-				count++;
 			}
 		}
+		format++;
+		count++;
 	}
 	va_end(ap);
 	return (count);
