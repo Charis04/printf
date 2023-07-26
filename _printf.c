@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 				str = va_arg(ap, char*);
 				if (str == NULL)
 				{
-					format++;
+					format+=2;
 					continue;
 				}
 				while (str[len] != '\0')
