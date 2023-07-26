@@ -11,17 +11,34 @@
 
 int _printf(const char *format, ...)
 {
-int count = 0;
-va_list ap;
+	int count = 0;
+	va_list ap;
 
-va_start(ap, format);
+	if (format == NULL)
+		return (-1);
 
-while (*format != '\0')
-{
-	write(1, format, 1);	
-	format++;
-	count++;
-}
+	va_start(ap, format);
 
-return (count);
+	while (*format != '\0')
+	{
+		if (*format != '%')
+		{
+			write(1, format, 1);
+			format++;
+			count++;
+		}
+		else
+		{
+			++format;
+			if (*format == 'c')
+			{
+				int *c = va_arg(ap, int*);
+				write(1, &c, 1);
+				count++;
+				format++;
+			}
+		}
+	}
+	va_end(ap);
+	return (count);
 }
