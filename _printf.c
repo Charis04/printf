@@ -38,8 +38,7 @@ int _printf(const char *format, ...)
 				count++;
 				format++;
 			}
-
-			if (*format == 's')
+			else if (*format == 's')
 			{
 				str = va_arg(ap, char*);
 				while (str[len] != '\0')
@@ -50,8 +49,13 @@ int _printf(const char *format, ...)
 				count+=len;
 				format++;
 			}
-
-			if (*format == '%')
+			else if (*format == '%')
+			{
+				write(1, format, 1);
+				format++;
+				count++;
+			}
+			else
 			{
 				write(1, format, 1);
 				format++;
