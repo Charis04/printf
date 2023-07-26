@@ -50,6 +50,13 @@ int _printf(const char *format, ...)
 				count+=len;
 				format++;
 			}
+
+			if (*format == '%')
+			{
+				write(1, format, 1);
+				format++;
+				count++;
+			}
 		}
 	}
 	va_end(ap);
