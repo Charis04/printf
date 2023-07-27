@@ -14,6 +14,7 @@ int _printf(const char *format, ...)
 	int count = 0, len = 0;
 	va_list ap;
 	char *str = NULL;
+	char *null = "(null)";
 
 	if (format == NULL)
 		return (-1);
@@ -39,9 +40,10 @@ int _printf(const char *format, ...)
 				str = va_arg(ap, char*);
 				if (str == NULL)
 				{
-					write(1, '\0', 1);
-					count++;
-					return (count);
+					write(1, null, 6);
+					count+=5;
+					format++;
+					continue;
 				}
 				while (str[len] != '\0')
 				{
