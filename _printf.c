@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 				if (str == NULL)
 				{
 					write(1, null, 6);
-					count+=5;
+					count++;
 					format++;
 					continue;
 				}
