@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 			++format;
 			if (*format == 'c')
 			{
-				int *c = va_arg(ap, int*);
+				char c = va_arg(ap, int);
 				write(1, &c, 1);
 			}
 			else if (*format == 's')
@@ -51,6 +51,8 @@ int _printf(const char *format, ...)
 				}
 				write(1, str, len);
 				count+=len - 1;
+				str = NULL;
+				len = 0;
 			}
 			else
 			{
