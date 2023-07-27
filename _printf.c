@@ -54,6 +54,11 @@ int _printf(const char *format, ...)
 				str = NULL;
 				len = 0;
 			}
+			else if (*format == '\0')
+			{
+				--format;
+				write(1, format, 1);
+			}
 			else
 			{
 				write(1, format, 1);
