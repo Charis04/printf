@@ -13,8 +13,7 @@ int _printf(const char *format, ...)
 {
 	int count = 0, len = 0;
 	va_list ap;
-	char *str = NULL;
-	char *null = "(null)";
+	/*char *null = "(null)";*/
 
 	if (format == NULL)
 		return (-1);
@@ -37,27 +36,32 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				str = va_arg(ap, char*);
+				char *str = va_arg(ap, char*);
 				if (str == NULL)
 				{
-					write(1, null, 6);
-					count++;
+					/*changed null to "(null)"*/
+					write(1, "(null)", 6);
+					count += 6 - 1; /*should increment by len of null*/
 					format++;
 					continue;
 				}
 				while (str[len] != '\0')
-				{
 					len++;
-				}
 				write(1, str, len);
 				count+=len - 1;
 				str = NULL;
 				len = 0;
+			}/*New addition*/
+			else if (*format == 'd' || *format == 'i')
+			{
+				int num = va_arg(ap, int);
+				count += print_num(num) - 1;
 			}
 			else if (*format == '\0')
 			{
-				--format;
-				write(1, format, 1);
+				break;
+				/*--format; loop should end having reached end of *format
+				write(1, format, 1);*/
 			}
 			else
 			{
@@ -65,7 +69,7 @@ int _printf(const char *format, ...)
 			}
 		}
 		format++;
-		count++;
+		count++;/*should be in each if*/
 	}
 	va_end(ap);
 	return (count);
