@@ -11,7 +11,9 @@
 
 int _printf(const char *format, ...)
 {
-	int count = 0, len = 0;
+	int num, count = 0;
+	char c;
+	char *str;
 	va_list ap;
 	/*char *null = "(null)";*/
 
@@ -31,37 +33,26 @@ int _printf(const char *format, ...)
 			++format;
 			if (*format == 'c')
 			{
-				char c = va_arg(ap, int);
+				c = va_arg(ap, int);
 				write(1, &c, 1);
 			}
 			else if (*format == 's')
 			{
-				char *str = va_arg(ap, char*);
-				if (str == NULL)
-				{
-					/*changed null to "(null)"*/
-					write(1, "(null)", 6);
-					count += 6 - 1; /*should increment by len of null*/
-					format++;
-					continue;
-				}
-				while (str[len] != '\0')
-					len++;
-				write(1, str, len);
-				count+=len - 1;
-				str = NULL;
-				len = 0;
-			}/*New addition*/
+				*str = va_arg(ap, char*);
+				count += print_str(str);
+			} /*New addition*/
 			else if (*format == 'd' || *format == 'i')
 			{
-				int num = va_arg(ap, int);
+				num = va_arg(ap, int);
 				count += print_num(num) - 1;
 			}
 			else if (*format == '\0')
 			{
 				break;
-				/*--format; loop should end having reached end of *format
-				write(1, format, 1);*/
+				/*
+				 * --format; loop should end having reached end of *format
+				 * write(1, format, 1);
+				 */
 			}
 			else
 			{

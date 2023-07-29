@@ -5,6 +5,7 @@
 #include <stdarg.h>
 
 int print_num(int n);
+int print_str(char *str);
 int _printf(const char *format, ...);
 
 #endif /* _FILE_NAME_H */

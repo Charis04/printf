@@ -11,7 +11,7 @@ int print_num(int n)
 	int count = 0;
 	char digit;
 
-	if (n > 0)
+	if (n < 0)
 	{
 		write(1, "-", 1);
 		count++;
@@ -25,5 +25,5 @@ int print_num(int n)
 	write(1, &digit, 1);
 	count++;
 
-	return count;
+	return (count);
 }
