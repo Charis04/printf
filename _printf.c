@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				*str = va_arg(ap, char*);
+				str = va_arg(ap, char*);
 				count += print_str(str);
 			} /*New addition*/
 			else if (*format == 'd' || *format == 'i')
