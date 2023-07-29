@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <limits.h>
 
 int print_num(int n);
 int print_str(char *str);

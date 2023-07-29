@@ -15,7 +15,13 @@ int print_num(int n)
 	{
 		write(1, "-", 1);
 		count++;
-		n = -n;
+		/* Handle special case for minimum integer value */
+		if (n == INT_MIN)
+		{
+			write(1, "2147483648", 10);
+			return count + 10;
+		}
+		n *= -1;
 	}
 
 	if (n / 10)
