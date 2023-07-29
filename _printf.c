@@ -44,7 +44,7 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				num = va_arg(ap, int);
-				count += print_num(num);
+				count += print_num(num) - 1;
 			}
 			else if (*format == '\0')
 			{
